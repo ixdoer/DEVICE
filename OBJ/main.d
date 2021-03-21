@@ -32,3 +32,6 @@
 ..\obj\main.o: ..\SYSTEM\delay\delay.h
 ..\obj\main.o: ..\HARDWARE\LED\led.h
 ..\obj\main.o: ..\HARDWARE\BEEP\beep.h
+..\obj\main.o: ..\SYSTEM\usart\usart.h
+..\obj\main.o: ..\HARDWARE\LSENS\lsens.h
+..\obj\main.o: ..\HARDWARE\ADC\adc.h
