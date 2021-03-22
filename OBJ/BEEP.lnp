@@ -20,6 +20,7 @@
 "..\obj\esp8266.o"
 "..\obj\mqttkit.o"
 "..\obj\onenet.o"
+"..\obj\cjson.o"
 --strict --scatter "..\OBJ\BEEP.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

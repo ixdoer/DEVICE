@@ -36,5 +36,7 @@
 ..\obj\onenet.o: ..\SYSTEM\usart\usart.h
 ..\obj\onenet.o: ..\SYSTEM\delay\delay.h
 ..\obj\onenet.o: ..\SYSTEM\sys\sys.h
+..\obj\onenet.o: ..\HARDWARE\LED\led.h
 ..\obj\onenet.o: D:\STUDY\graduationProject\dev\keil5\ARM\ARMCC\Bin\..\include\string.h
 ..\obj\onenet.o: D:\STUDY\graduationProject\dev\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\onenet.o: ..\NET\cJson\cJSON.h

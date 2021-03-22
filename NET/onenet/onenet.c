@@ -1,21 +1,6 @@
 /**
-	************************************************************
-	************************************************************
-	************************************************************
-	*	文件名： 	onenet.c
-	*
-	*	作者： 		张继瑞
-	*
-	*	日期： 		2017-05-08
-	*
-	*	版本： 		V1.1
-	*
-	*	说明： 		与onenet平台的数据交互接口层
-	*
-	*	修改记录：	V1.0：协议封装、返回判断都在同一个文件，并且不同协议接口不同。
-	*				V1.1：提供统一接口供应用层使用，根据不同协议文件来封装协议相关的内容。
-	************************************************************
-	************************************************************
+	************************************************************	
+	说明： 		与onenet平台的数据交互接口层	
 	************************************************************
 **/
 
@@ -32,10 +17,12 @@
 //硬件驱动
 #include "usart.h"
 #include "delay.h"
+#include "led.h"
 
 //C库
 #include <string.h>
 #include <stdio.h>
+#include <cJSON.h>
 
 
 #define PROID		"77247"
@@ -195,7 +182,7 @@ void OneNet_RevPro(unsigned char *cmd)
 	char *dataPtr = NULL;
 	char numBuf[10];
 	int num = 0;
-	
+	cJSON *json,*json_value;
 	type = MQTT_UnPacketRecv(cmd);
 	switch(type)
 	{
@@ -204,15 +191,10 @@ void OneNet_RevPro(unsigned char *cmd)
 			result = MQTT_UnPacketCmd(cmd, &cmdid_topic, &req_payload, &req_len);	//解出topic和消息体
 			if(result == 0)
 			{
-				UsartPrintf(USART_DEBUG, "cmdid: %s, req: %s, req_len: %d\r\n", cmdid_topic, req_payload, req_len);
-				
-				if(MQTT_PacketCmdResp(cmdid_topic, req_payload, &mqttPacket) == 0)	//命令回复组包
-				{
-					UsartPrintf(USART_DEBUG, "Tips:	Send CmdResp\r\n");
+				UsartPrintf(USART_DEBUG, "cmdid: %s, req: %s, req_len: %d\r\n", cmdid_topic, req_payload, req_len);					
 					
-					ESP8266_SendData(mqttPacket._data, mqttPacket._len);			//回复命令
-					MQTT_DeleteBuffer(&mqttPacket);									//删包
-				}
+				MQTT_DeleteBuffer(&mqttPacket);		//删包
+				
 			}
 		
 		break;
@@ -224,34 +206,21 @@ void OneNet_RevPro(unsigned char *cmd)
 			{
 				UsartPrintf(USART_DEBUG, "topic: %s, topic_len: %d, payload: %s, payload_len: %d\r\n",
 																	cmdid_topic, topic_len, req_payload, req_len);
-				
-				switch(qos)
-				{
-					case 1:															//收到publish的qos为1，设备需要回复Ack
-					
-						if(MQTT_PacketPublishAck(pkt_id, &mqttPacket) == 0)
-						{
-							UsartPrintf(USART_DEBUG, "Tips:	Send PublishAck\r\n");
-							ESP8266_SendData(mqttPacket._data, mqttPacket._len);
-							MQTT_DeleteBuffer(&mqttPacket);
-						}
-					
-					break;
-					
-					case 2:															//收到publish的qos为2，设备先回复Rec
-																					//平台回复Rel，设备再回复Comp
-						if(MQTT_PacketPublishRec(pkt_id, &mqttPacket) == 0)
-						{
-							UsartPrintf(USART_DEBUG, "Tips:	Send PublishRec\r\n");
-							ESP8266_SendData(mqttPacket._data, mqttPacket._len);
-							MQTT_DeleteBuffer(&mqttPacket);
-						}
-					
-					break;
-					
-					default:
-						break;
+				json=cJSON_Parse(req_payload);	     //对数据包进行JSON格式解析
+				if(!json)UsartPrintf(USART_DEBUG, "json解析错误" );	
+				else
+				{//解析开关值
+					json_value=cJSON_GetObjectItem(json,"LED_SW");
+					if(json_value->valueint) //json_value>0且为整型
+					{
+						LED1=0;//打开LED0
+					}
+					else
+					{
+						LED1=1;//关闭LED0
+					}
 				}
+				cJSON_Delete(json);
 			}
 		
 		break;

@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\BEEP;..\NET\device;..\NET\MQTT;..\NET\onenet;..\HARDWARE\ADC;..\HARDWARE\LSENS</IncludePath>
+              <IncludePath>..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\BEEP;..\NET\device;..\NET\MQTT;..\NET\onenet;..\HARDWARE\ADC;..\HARDWARE\LSENS;..\NET\cJson</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -537,6 +537,11 @@
               <FileName>onenet.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\NET\onenet\onenet.c</FilePath>
+            </File>
+            <File>
+              <FileName>cJSON.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\NET\cJson\cJSON.c</FilePath>
             </File>
           </Files>
         </Group>
