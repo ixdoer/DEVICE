@@ -1,20 +1,8 @@
 /**
-	************************************************************
-	************************************************************
-	************************************************************
-	*	文件名： 	esp8266.c
-	*
-	*	作者： 		张继瑞
-	*
-	*	日期： 		2017-05-08
-	*
-	*	版本： 		V1.0
-	*
-	*	说明： 		ESP8266的简单驱动
-	*
-	*	修改记录：	
-	************************************************************
-	************************************************************
+	************************************************************	
+	*	文件名： 	esp8266.c*	
+	
+	*	说明： 		ESP8266的简单驱动		
 	************************************************************
 **/
 
@@ -33,9 +21,9 @@
 #include <stdio.h>
 
 
-#define ESP8266_WIFI_INFO		"AT+CWJAP=\"ONENET\",\"IOT@Chinamobile123\"\r\n"
+#define ESP8266_WIFI_INFO		"AT+CWJAP=\"3-120\",\"huangguochen\"\r\n"
 
-#define ESP8266_ONENET_INFO		"AT+CIPSTART=\"TCP\",\"183.230.40.39\",6002\r\n"
+#define ESP8266_ONENET_INFO		"AT+CIPSTART=\"TCP\",\"broker.emqx.io\",1883\r\n"
 
 
 unsigned char esp8266_buf[128];
@@ -108,7 +96,7 @@ _Bool ESP8266_SendCmd(char *cmd, char *res)
 	
 	unsigned char timeOut = 200;
 
-	Usart_SendString(USART2, (unsigned char *)cmd, strlen((const char *)cmd));
+	Usart_SendString(USART3, (unsigned char *)cmd, strlen((const char *)cmd));
 	
 	while(timeOut--)
 	{
@@ -150,7 +138,7 @@ void ESP8266_SendData(unsigned char *data, unsigned short len)
 	sprintf(cmdBuf, "AT+CIPSEND=%d\r\n", len);		//发送命令
 	if(!ESP8266_SendCmd(cmdBuf, ">"))				//收到‘>’时可以发送数据
 	{
-		Usart_SendString(USART2, data, len);		//发送设备连接请求数据
+		Usart_SendString(USART3, data, len);		//发送设备连接请求数据
 	}
 
 }
@@ -196,7 +184,8 @@ unsigned char *ESP8266_GetIPD(unsigned short timeOut)
 		}
 		
 		delay_ms(5);													//延时等待
-	} while(timeOut--);
+		timeOut--;
+	} while(timeOut>0);
 	
 	return NULL;														//超时还未找到，返回空指针
 
@@ -233,9 +222,17 @@ void ESP8266_Init(void)
 	
 	ESP8266_Clear();
 	
-	UsartPrintf(USART_DEBUG, "1. AT\r\n");
+	UsartPrintf(USART_DEBUG, "0. AT\r\n");
 	while(ESP8266_SendCmd("AT\r\n", "OK"))
 		delay_ms(500);
+	
+	//每次复位后重置esp8266
+	UsartPrintf(USART_DEBUG, "1. RST\r\n");
+	while(ESP8266_SendCmd("AT+RES\r\n", ""))
+		delay_ms(500);	
+	while(ESP8266_SendCmd("AT+CIPCLOSE\r\n", ""))
+		delay_ms(500);
+	
 	
 	UsartPrintf(USART_DEBUG, "2. CWMODE\r\n");
 	while(ESP8266_SendCmd("AT+CWMODE=1\r\n", "OK"))
@@ -258,7 +255,7 @@ void ESP8266_Init(void)
 }
 
 //==========================================================
-//	函数名称：	USART2_IRQHandler
+//	函数名称：	USART3_IRQHandler
 //
 //	函数功能：	串口2收发中断
 //
@@ -268,15 +265,15 @@ void ESP8266_Init(void)
 //
 //	说明：		
 //==========================================================
-void USART2_IRQHandler(void)
+void USART3_IRQHandler(void)
 {
 
-	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET) //接收中断
+	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET) //接收中断
 	{
 		if(esp8266_cnt >= sizeof(esp8266_buf))	esp8266_cnt = 0; //防止串口被刷爆
-		esp8266_buf[esp8266_cnt++] = USART2->DR;
+		esp8266_buf[esp8266_cnt++] = USART3->DR;
 		
-		USART_ClearFlag(USART2, USART_FLAG_RXNE);
+		USART_ClearFlag(USART3, USART_FLAG_RXNE);
 	}
 
 }

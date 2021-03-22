@@ -267,25 +267,3 @@ void USART1_IRQHandler(void)
 
 }
 
-/*
-************************************************************
-*	函数名称：	USART1_IRQHandler
-*
-*	函数功能：	串口1收发中断
-*
-*	入口参数：	无
-*
-*	返回参数：	无
-*
-*	说明：		
-************************************************************
-*/
-void USART3_IRQHandler(void)
-{
-
-	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET) //接收中断
-	{
-		USART_ClearFlag(USART1, USART_FLAG_RXNE);
-	}
-
-}

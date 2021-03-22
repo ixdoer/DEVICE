@@ -35,3 +35,6 @@
 ..\obj\main.o: ..\SYSTEM\usart\usart.h
 ..\obj\main.o: ..\HARDWARE\LSENS\lsens.h
 ..\obj\main.o: ..\HARDWARE\ADC\adc.h
+..\obj\main.o: ..\NET\device\esp8266.h
+..\obj\main.o: ..\NET\onenet\onenet.h
+..\obj\main.o: D:\STUDY\graduationProject\dev\keil5\ARM\ARMCC\Bin\..\include\stdio.h

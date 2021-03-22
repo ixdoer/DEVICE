@@ -83,13 +83,13 @@ _Bool OneNet_DevLink(void)
 			{
 				switch(MQTT_UnPacketConnectAck(dataPtr))
 				{
-					case 0:UsartPrintf(USART_DEBUG, "Tips:	连接成功\r\n");status = 0;break;
+					case 0:UsartPrintf(USART_DEBUG, "Tips:	服务器连接成功\r\n");status = 0;break;
 					
-					case 1:UsartPrintf(USART_DEBUG, "WARN:	连接失败：协议错误\r\n");break;
-					case 2:UsartPrintf(USART_DEBUG, "WARN:	连接失败：非法的clientid\r\n");break;
-					case 3:UsartPrintf(USART_DEBUG, "WARN:	连接失败：服务器失败\r\n");break;
-					case 4:UsartPrintf(USART_DEBUG, "WARN:	连接失败：用户名或密码错误\r\n");break;
-					case 5:UsartPrintf(USART_DEBUG, "WARN:	连接失败：非法链接(比如token非法)\r\n");break;
+					case 1:UsartPrintf(USART_DEBUG, "WARN:	服务器连接失败：协议错误\r\n");break;
+					case 2:UsartPrintf(USART_DEBUG, "WARN:	服务器连接失败：非法的clientid\r\n");break;
+					case 3:UsartPrintf(USART_DEBUG, "WARN:	服务器连接失败：服务器失败\r\n");break;
+					case 4:UsartPrintf(USART_DEBUG, "WARN:	服务器连接失败：用户名或密码错误\r\n");break;
+					case 5:UsartPrintf(USART_DEBUG, "WARN:	服务器连接失败：非法链接(比如token非法)\r\n");break;
 					
 					default:UsartPrintf(USART_DEBUG, "ERR:	连接失败：未知错误\r\n");break;
 				}
@@ -127,7 +127,7 @@ void OneNet_Subscribe(const char *topics[], unsigned char topic_cnt)
 	for(; i < topic_cnt; i++)
 		UsartPrintf(USART_DEBUG, "Subscribe Topic: %s\r\n", topics[i]);
 	
-	if(MQTT_PacketSubscribe(MQTT_SUBSCRIBE_ID, MQTT_QOS_LEVEL2, topics, topic_cnt, &mqttPacket) == 0)
+	if(MQTT_PacketSubscribe(MQTT_SUBSCRIBE_ID, MQTT_QOS_LEVEL0, topics, topic_cnt, &mqttPacket) == 0)
 	{
 		ESP8266_SendData(mqttPacket._data, mqttPacket._len);					//向平台发送订阅请求
 		
@@ -155,7 +155,7 @@ void OneNet_Publish(const char *topic, const char *msg)
 	
 	UsartPrintf(USART_DEBUG, "Publish Topic: %s, Msg: %s\r\n", topic, msg);
 	
-	if(MQTT_PacketPublish(MQTT_PUBLISH_ID, topic, msg, strlen(msg), MQTT_QOS_LEVEL2, 0, 1, &mqttPacket) == 0)
+	if(MQTT_PacketPublish(MQTT_PUBLISH_ID, topic, msg, strlen(msg), MQTT_QOS_LEVEL0, 0, 1, &mqttPacket) == 0)
 	{
 		ESP8266_SendData(mqttPacket._data, mqttPacket._len);					//向平台发送订阅请求
 		
