@@ -1,7 +1,7 @@
 ..\obj\onenet.o: ..\NET\onenet\onenet.c
 ..\obj\onenet.o: ..\USER\stm32f10x.h
 ..\obj\onenet.o: ..\CORE\core_cm3.h
-..\obj\onenet.o: D:\STUDY\graduationProject\dev\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\onenet.o: D:\WORK\keil5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\onenet.o: ..\USER\system_stm32f10x.h
 ..\obj\onenet.o: ..\USER\stm32f10x_conf.h
 ..\obj\onenet.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
@@ -32,11 +32,12 @@
 ..\obj\onenet.o: ..\NET\onenet\onenet.h
 ..\obj\onenet.o: ..\NET\MQTT\mqttkit.h
 ..\obj\onenet.o: ..\NET\MQTT\Common.h
-..\obj\onenet.o: D:\STUDY\graduationProject\dev\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\onenet.o: D:\WORK\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\onenet.o: ..\SYSTEM\usart\usart.h
 ..\obj\onenet.o: ..\SYSTEM\delay\delay.h
 ..\obj\onenet.o: ..\SYSTEM\sys\sys.h
 ..\obj\onenet.o: ..\HARDWARE\LED\led.h
-..\obj\onenet.o: D:\STUDY\graduationProject\dev\keil5\ARM\ARMCC\Bin\..\include\string.h
-..\obj\onenet.o: D:\STUDY\graduationProject\dev\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\onenet.o: ..\HARDWARE\BEEP\beep.h
+..\obj\onenet.o: D:\WORK\keil5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\onenet.o: D:\WORK\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\onenet.o: ..\NET\cJson\cJSON.h

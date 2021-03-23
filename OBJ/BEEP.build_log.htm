@@ -3,38 +3,71 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ¦ÌVision V5.14.0.0
+IDE-Version: ¦ÌVision V5.15
 Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information:  ,  , LIC=MGX2Z-JM5CR-59WGZ-JCITT-60JQ9-WFNG9
+License Information:  ,  , LIC=----
  
 Tool Versions:
-Toolchain:       MDK-ARM Professional  Version: 5.14.0.0
-Toolchain Path:  D:\STUDY\graduationProject\dev\keil5\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.05 update 1 (build 106)
-Assembler:       Armasm.exe V5.05 update 1 (build 106)
-Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
-Library Manager: ArmAr.exe V5.05 update 1 (build 106)
-Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
-CPU DLL:         SARMCM3.DLL V5.14.0.0
+Toolchain:       MDK-ARM Professional  Version: 5.15.0
+Toolchain Path:  D:\WORK\keil5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 2 (build 169)
+Assembler:       Armasm.exe V5.05 update 2 (build 169)
+Linker/Locator:  ArmLink.exe V5.05 update 2 (build 169)
+Library Manager: ArmAr.exe V5.05 update 2 (build 169)
+Hex Converter:   FromElf.exe V5.05 update 2 (build 169)
+CPU DLL:         SARMCM3.DLL V5.15.0
 Dialog DLL:      DARMSTM.DLL V1.65.0.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.14.0_KEIL
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.15.0_KEIL
 Dialog DLL:      TARMSTM.DLL V1.64.0.0
  
 <h2>Project:</h2>
 C:\Users\75259\Desktop\DEVICE\USER\BEEP.uvprojx
-Project File Date:  03/22/2021
+Project File Date:  03/24/2021
 
 <h2>Output:</h2>
-Build target 'BEEP'
+*** Using Compiler 'V5.05 update 2 (build 169)', folder: 'D:\WORK\keil5\ARM\ARMCC\Bin'
+Rebuild target 'BEEP'
+compiling main.c...
+compiling stm32f10x_it.c...
+compiling system_stm32f10x.c...
+compiling stm32f10x_adc.c...
+compiling stm32f10x_fsmc.c...
+compiling led.c...
+compiling beep.c...
+compiling lsens.c...
+compiling adc.c...
+compiling delay.c...
+compiling sys.c...
+compiling usart.c...
+compiling core_cm3.c...
+assembling startup_stm32f10x_hd.s...
+compiling misc.c...
+compiling stm32f10x_gpio.c...
+compiling stm32f10x_rcc.c...
+compiling stm32f10x_usart.c...
+compiling esp8266.c...
+compiling MqttKit.c...
 compiling onenet.c...
+compiling cJSON.c...
+..\NET\cJson\cJSON.c(55): warning:  #1293-D: assignment in condition
+        if (!(copy = (char*)cJSON_malloc(len))) return 0;
+..\NET\cJson\cJSON.c(278): warning:  #1293-D: assignment in condition
+        ptr=str;while ((token=*ptr) && ++len) {if (strchr("\"\\\b\f\n\r\t",token)) len++; else if (token<32) len+=5;ptr++;}
+..\NET\cJson\cJSON.c(352): warning:  #111-D: statement is unreachable
+        return p.buffer;
+..\NET\cJson\cJSON.c(423): warning:  #1293-D: assignment in condition
+                if (!(new_item=cJSON_New_Item())) return 0;     /* memory fail */
+..\NET\cJson\cJSON.c(535): warning:  #1293-D: assignment in condition
+                if (!(new_item=cJSON_New_Item()))       return 0; /* memory fail */
+..\NET\cJson\cJSON.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=33878 RO-data=1014 RW-data=80 ZI-data=1760  
+Program Size: Code=33886 RO-data=1010 RW-data=80 ZI-data=1760  
 FromELF: creating hex file...
-"..\OBJ\BEEP.axf" - 0 Error(s), 0 Warning(s).
+"..\OBJ\BEEP.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   C:\Users\75259\Desktop\DEVICE\USER\RTE
-  D:\STUDY\graduationProject\dev\keil5\ARM\PACK\Keil\STM32F1xx_DFP\1.0.5\Device\Include
+  D:\WORK\keil5\ARM\PACK\Keil\STM32F1xx_DFP\1.1.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
 </pre>

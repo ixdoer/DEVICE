@@ -18,6 +18,7 @@
 #include "usart.h"
 #include "delay.h"
 #include "led.h"
+#include "beep.h"
 
 //C库
 #include <string.h>
@@ -213,11 +214,13 @@ void OneNet_RevPro(unsigned char *cmd)
 					json_value=cJSON_GetObjectItem(json,"LED_SW");
 					if(json_value->valueint) //json_value>0且为整型
 					{
-						LED1=0;//打开LED0
+						LED1=0;//打开LED0		
+						BEEP=1;		
 					}
 					else
 					{
 						LED1=1;//关闭LED0
+						BEEP=0;
 					}
 				}
 				cJSON_Delete(json);

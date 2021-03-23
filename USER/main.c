@@ -8,8 +8,9 @@
 #include "onenet.h"
 #include "stdio.h"  //NULL
 
+ u8 led_status=0;
  u8 light;                  //光照度
- const char *topics[]={"smartsub"};
+ const char *topics[]={"ctrl"};
  unsigned short timeCount=0; 
  unsigned char *dataPtr = NULL; 
  int main(void)
@@ -37,11 +38,11 @@
 		
 		if(++timeCount >= 10){									//发送间隔5s
 		
-			//UsartPrintf(USART_DEBUG,"当前光照强度为：%d\n",light);
-			
-			//UsartPrintf(USART_DEBUG, "OneNet_Publish\r\n");
+			//led_status=GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_5);//读取LED1的状态
+			//sprintf(PUB_BUF,"{"Hum":%d.%d,"Temp":%d:%d,"Light":%.1f,"Led":%d,"Beep":%d}",
+			//humidityH,humidtityL,temperatureH,temperatureL,light,led_status?0:1,alarmFlag);
 				
-			OneNet_Publish("smartpub","oh yeah!");
+			OneNet_Publish("device","hello");
 			
 			timeCount = 0;
 			
