@@ -37,4 +37,7 @@
 ..\obj\main.o: ..\HARDWARE\ADC\adc.h
 ..\obj\main.o: ..\NET\device\esp8266.h
 ..\obj\main.o: ..\NET\onenet\onenet.h
+..\obj\main.o: ..\HARDWARE\OLED\oled.h
+..\obj\main.o: D:\WORK\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\main.o: ..\HARDWARE\DHT11\dht11.h
 ..\obj\main.o: D:\WORK\keil5\ARM\ARMCC\Bin\..\include\stdio.h

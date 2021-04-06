@@ -214,13 +214,17 @@ void OneNet_RevPro(unsigned char *cmd)
 					json_value=cJSON_GetObjectItem(json,"LED_SW");
 					if(json_value->valueint) //json_value>0且为整型
 					{
-						LED1=0;//打开LED0		
-						BEEP=1;		
+						LED0=0;//打开LED0		
+						BEEP=1;	
+						delay_ms(500);		
+						BEEP=0;							
 					}
 					else
 					{
-						LED1=1;//关闭LED0
-						BEEP=0;
+						LED0=1;//关闭LED0
+						BEEP=1;	
+						delay_ms(500);		
+						BEEP=0;					
 					}
 				}
 				cJSON_Delete(json);
