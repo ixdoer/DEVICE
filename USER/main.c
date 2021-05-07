@@ -61,10 +61,10 @@
 		OLED_Refresh_Gram();					    //更新显示到OLED	
 			
 		
-		if(++timeCount >= 50){									//发送间隔5s
+		if(++timeCount >= 10){									//发送间隔5s
 		
-			//led_status=GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_5);//读取LED1的状态
-			sprintf(PUB_BUF,"{\"Light\":%d,\"Temp\":%d,\"Humi\":%d}",light,temperature,humidity);					
+			led_status=GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_5);//读取LED1的状态
+			sprintf(PUB_BUF,"{\"Light\":%d,\"Temp\":%d,\"Humi\":%d,\"Led\":%d}",light,temperature,humidity,led_status);					
 			OneNet_Publish("data",PUB_BUF);		
 			
 			timeCount = 0;			

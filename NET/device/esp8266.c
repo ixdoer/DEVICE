@@ -21,7 +21,7 @@
 #include <stdio.h>
 
 
-#define ESP8266_WIFI_INFO		"AT+CWJAP=\"3-120\",\"huangguochen\"\r\n"
+#define ESP8266_WIFI_INFO		"AT+CWJAP=\"Idoer\",\"Idoer123\"\r\n"
 
 #define ESP8266_ONENET_INFO		"AT+CIPSTART=\"TCP\",\"idoer.top\",1883\r\n"
 
